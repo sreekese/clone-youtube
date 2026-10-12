@@ -1,16 +1,20 @@
-import Button from "./Button"
-
-const list = ["All", "Music", "Gaming", "News", "Sports", "Movies", "Fashion", "Education", "Comedy", "Travel"]
-
-const ButtonList = () => {
+import { useDispatch, useSelector } from "react-redux";
+import Button from "./Button";
+import { categories } from "../data/videos";
+import { selectCategory } from "../utils/appSlice";
+export default function ButtonList() {
+  const category = useSelector((state) => state.app.category);
+  const dispatch = useDispatch();
   return (
-    <div className="flex flex-row overflow-x-auto">
-        {list.map((item) => (
-            <Button name={item} />
-        ))}
+    <div className="categories" aria-label="Video categories">
+      {categories.map((name) => (
+        <Button
+          key={name}
+          name={name}
+          selected={category === name}
+          onClick={() => dispatch(selectCategory(name))}
+        />
+      ))}
     </div>
-
-  )
+  );
 }
-
-export default ButtonList

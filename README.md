@@ -1,16 +1,38 @@
-# React + Vite
+# ViewTube
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive YouTube-inspired video browsing demo built with React, Redux Toolkit, and Vite.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+From this directory (`clone-youtube/` inside the workspace):
 
-## React Compiler
+```sh
+npm ci
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Requires Node.js 22.12+ (or a compatible newer release).
 
-## Expanding the ESLint configuration
+```sh
+npm test          # Unit and component interaction tests
+npm run test:watch
+npm run lint
+npm run build
+npm run preview  # Serve the production build locally
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+- Search sample videos by title, channel, or category and combine with category filters.
+- Play videos with native browser playback controls.
+- Like videos, save them for later, and revisit or clear watch history.
+- Library preferences persist in localStorage on this browser. Blocked or corrupt storage falls back to an in-memory session.
+- Responsive layout, keyboard-operable controls, navigation toggle, and empty/error states.
+
+## Structure
+
+`src/data/videos.js` owns the sample catalog and pure filtering logic. `src/utils/appSlice.js` manages application state; `store.js` validates and persists library data. Components keep browsing, navigation, and playback separate. `src/test` covers filters, reducers, storage recovery, and the primary user journeys with Vitest and React Testing Library.
+
+## Demo scope
+
+This is a frontend demo, without authentication, uploads, live YouTube search, or a backend. Video and thumbnail files come from Google's public sample media bucket and require internet access. View counts are illustrative. History records opening a video, regardless of whether playback starts. Empty categories intentionally display an empty state. Local preferences are not synced across devices.

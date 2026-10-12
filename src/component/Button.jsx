@@ -1,11 +1,11 @@
-
-
-const Button = ({ name }) => {
+export default function Button({ name, selected, onClick }) {
   return (
-    <div className="flex flex-row">
-        <button className="bg-gray-200 hover:bg-gray-300 p-2 m-4 rounded">{name}</button>
-    </div>
-  )
+    <button
+      className={`chip ${selected ? "selected" : ""}`}
+      aria-pressed={selected}
+      onClick={onClick}
+    >
+      {name}
+    </button>
+  );
 }
-
-export default Button
